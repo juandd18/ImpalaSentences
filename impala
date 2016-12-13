@@ -30,7 +30,17 @@ refresh sample_data;
 // select to the table created
 select max(val1) from sample_data where webpage = 'facebook.com' group by webpage;
 
+//code to create view JUST read data does not create data in hdfs
+create view normalized_view as
+select one.id, one.val, one.zerofill, one.name,
+one.assertion, two.id as location_id
+from sample_data one join usa_cities two 1
+on (one.city = two.city and one.state = two.state)
 
+//MATERIALIZE view in a table
+create table normalized_text
+row format delimited fields terminated by ","
+as select * from normalized_view;
 
 
 
