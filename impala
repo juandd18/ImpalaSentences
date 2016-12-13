@@ -1,0 +1,12 @@
+
+//Queries without FROM, for testing purpose only
+
+//sentencias con regex
+SELECT 'abc123xyz' REGEXP '[[:digit:]]{3}';
+
+SELECT regexp_replace('123456','(2|4|6)','x');
+
+//time handler
+SELECT now() + INTERVAL 3 DAYS + INTERVAL 5 HOURS;
+
+
