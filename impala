@@ -65,7 +65,13 @@ insert into stats_demo_parquet partition (initial)
 [shuffle] select * from partitioned_normalized_parquet 2
 limit 1000000;
 
-
+/////////////RECOMENDATIONS FOR SIZE REDUCTION///////////////
+1.Converted the data to Parquet file format.
+2.Normalized the data to reduce redundancy.
+3.Partitioned the data to quickly locate ranges of values.
+4.Computed the stats for both tables involved in the join query.
+5.Referenced the partition key columns wherever practical in the query itself, especially in the join and WHERE clauses.
+6.Used EXPLAIN to get an idea of the efficiency of possible queries as we iterated through several alternatives.
 
 
 
