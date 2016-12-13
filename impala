@@ -46,4 +46,17 @@ as select * from normalized_view;
 create table normalized_parquet stored as parquet
 as select * from sample_data;
 
+//first we should compute the stats
+compute stats normalized_parquet;
+//stats of the columns
+show column stats normalized_parquet;
+
+//shows how impala makes the join or the select
+explain select max(sample_copy.val1) from sample_copy join normalized_parquet using(id);
+
+
+
+
+
+
 
