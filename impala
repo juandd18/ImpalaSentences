@@ -54,7 +54,16 @@ show column stats normalized_parquet;
 //shows how impala makes the join or the select
 explain select max(sample_copy.val1) from sample_copy join normalized_parquet using(id);
 
+// "like" create a table with the same structure  
+create table stats_demo_parquet
+like partitioned_normalized_parquet; 1
 
+//We use the [SHUFFLE] hint technique to avoid having each of the four nodes try to allocate (size of the file) GB-sized buffers to write 
+//separate data files for all the partition values. The “shuffle” operation takes a little longer, 
+//but avoids potential out-of-memory conditions.
+insert into stats_demo_parquet partition (initial)
+[shuffle] select * from partitioned_normalized_parquet 2
+limit 1000000;
 
 
 
