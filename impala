@@ -9,4 +9,29 @@ SELECT regexp_replace('123456','(2|4|6)','x');
 //time handler
 SELECT now() + INTERVAL 3 DAYS + INTERVAL 5 HOURS;
 
+//create table
+create table sample_data
+(id bigint,val int, webpage string, lastname string,val1 float, val2 float, 
+lastname2 string, val12 string, val21 float, number bigint , number2 bigint)
+row format delimited fields terminated by ",";
+
+//shows statistics of the table
+show table stats sample_data;
+
+//shows structure of the table
+describe formatted sample_data;
+
+//insert data to the table location (where the hive table is reading data)
+ hdfs dfs -put majestic_million.csv /user/hive/warehouse/juandavid.db/sample_data
+
+//ALWAYS DO TO REFRESH
+refresh sample_data;
+
+// select to the table created
+select max(val1) from sample_data where webpage = 'facebook.com' group by webpage;
+
+
+
+
+
 
