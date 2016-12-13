@@ -42,6 +42,8 @@ create table normalized_text
 row format delimited fields terminated by ","
 as select * from normalized_view;
 
-
+//CONVERT TABLE TO A PARQUET FORMAT
+create table normalized_parquet stored as parquet
+as select * from sample_data;
 
 
